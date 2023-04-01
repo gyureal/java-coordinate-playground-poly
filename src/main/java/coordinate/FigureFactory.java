@@ -16,9 +16,9 @@ public class FigureFactory {
     private static final Map<Integer, Function<List<Point>, Figure>> creators = new HashMap<>(); // static 선언 필수
 
     static {
-        creators.put(Line.LINE_POINT_SIZE, points -> new Line(points));       // method reference 변환 가능
-        creators.put(Rectangle.RECTANGLE_POINT_SIZE, points -> new Rectangle(points));
-        creators.put(Triangle.TRIANGLE_POINT_SIZE, points-> new Triangle(points));
+        creators.put(Line.LINE_POINT_SIZE, Line::new);       // method reference 변환 가능
+        creators.put(Rectangle.RECTANGLE_POINT_SIZE, Rectangle::new);
+        creators.put(Triangle.TRIANGLE_POINT_SIZE, Triangle::new);
     }
 
     static Figure getInstance(List<Point> points) {
