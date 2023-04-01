@@ -13,7 +13,7 @@ import java.util.function.Function;
  */
 public class FigureFactory {
 
-    private static final Map<Integer, FigureCreator> creators = new HashMap<>(); // static 선언 필수
+    private static final Map<Integer, Function<List<Point>, Figure>> creators = new HashMap<>(); // static 선언 필수
 
     static {
         creators.put(Line.LINE_POINT_SIZE, points -> new Line(points));       // method reference 변환 가능
@@ -22,9 +22,9 @@ public class FigureFactory {
     }
 
     static Figure getInstance(List<Point> points) {
-        FigureCreator creator = creators.getOrDefault(points.size(), null);
+        Function<List<Point>, Figure> creator = creators.getOrDefault(points.size(), null);
         if (creator != null) {
-            return creator.create(points);
+            return creator.apply(points);
         }
 
         throw new IllegalArgumentException("유효하지 않은 도형입니다.");
